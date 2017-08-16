@@ -5,22 +5,50 @@ var path = require('path');
 var app = express();
 app.use(morgan('combined'));
 
-var articleOne = 
-{
-    title: 'Article One | Revathi',
-    heading: 'Article One',
-    date: 'August 16, 2017',
-    content: `<p>
-                    This is the first HTML page created using code console. First link the HTML file with the server file. Commit the changes to the server and restart the server. Then view the HTML file and its content using the URL on a browser.
-                </p>
-                <p>
-                    This is the first HTML page created using code console. First link the HTML file with the server file. Commit the changes to the server and restart the server. Then view the HTML file and its content using the URL on a browser.
-                </p>
-                <p>
-                    This is the first HTML page created using code console. First link the HTML file with the server file. Commit the changes to the server and restart the server. Then view the HTML file and its content using the URL on a browser.
-                </p>`
+var articles = {
+    'article-one': {
+        title: 'Article One | Revathi',
+        heading: 'Article One',
+        date: 'August 16, 2017',
+        content: `<p>
+                        This is the first HTML page created using code console. First link the HTML file with the server file. Commit the changes to the server and restart the server. Then view the HTML file and its content using the URL on a browser.
+                    </p>
+                    <p>
+                        This is the first HTML page created using code console. First link the HTML file with the server file. Commit the changes to the server and restart the server. Then view the HTML file and its content using the URL on a browser.
+                    </p>
+                    <p>
+                        This is the first HTML page created using code console. First link the HTML file with the server file. Commit the changes to the server and restart the server. Then view the HTML file and its content using the URL on a browser.
+                    </p>`
+    },
+    'article-two': {
+        title: 'Article Two | Revathi',
+        heading: 'Article Two',
+        date: 'August 19, 2017',
+        content: `<p>
+                        This is the second HTML page created using code console. First link the HTML file with the server file. Commit the changes to the server and restart the server. Then view the HTML file and its content using the URL on a browser.
+                    </p>
+                    <p>
+                        This is the secocnd HTML page created using code console. First link the HTML file with the server file. Commit the changes to the server and restart the server. Then view the HTML file and its content using the URL on a browser.
+                    </p>
+                    <p>
+                        This is the second HTML page created using code console. First link the HTML file with the server file. Commit the changes to the server and restart the server. Then view the HTML file and its content using the URL on a browser.
+                    </p>`
+    },
+    'article-three': {
+        title: 'Article Three | Revathi',
+        heading: 'Article Three',
+        date: 'August 18, 2017',
+        content: `<p>
+                        This is the third HTML page created using code console. First link the HTML file with the server file. Commit the changes to the server and restart the server. Then view the HTML file and its content using the URL on a browser.
+                    </p>
+                    <p>
+                        This is the third HTML page created using code console. First link the HTML file with the server file. Commit the changes to the server and restart the server. Then view the HTML file and its content using the URL on a browser.
+                    </p>
+                    <p>
+                        This is the third HTML page created using code console. First link the HTML file with the server file. Commit the changes to the server and restart the server. Then view the HTML file and its content using the URL on a browser.
+                    </p>`
+    },
 };
-
 function createTemplate (data) {
     var title = data.title;
     var date = data.date;
@@ -61,15 +89,11 @@ function createTemplate (data) {
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
 });
-app.get('/article-one', function (req, res) {
-  res.send(createTemplate(articleOne));
+app.get('/:articleName', function (req, res) {
+  var articleNames = req.params.articleName;
+  res.send(createTemplate(articles[articleName]));
 });
-app.get('/article-two', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui', 'article-two.html'));
-});
-app.get('/article-three', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui', 'article-three.html'));
-});
+
 app.get('/ui/style.css', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'style.css'));
 });
