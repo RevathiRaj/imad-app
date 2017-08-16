@@ -3,7 +3,8 @@ console.log('Loaded!');
 var element = document.getElementById('main-text');
 element.innerHTML = 'New Value';
 
-var img = document.getElementById('modi');
+//Move the image
+var img = document.getElementById('madi');
 img.onclick = function () {
- img.margin.marginLeft = '100px'; 
+    img.margin.marginLeft = '100px'; 
 };
