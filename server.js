@@ -85,6 +85,18 @@ function createTemplate (data) {
     return htmlTemplate;
 }
 
+function hash (input, salt)
+//how do we create a hash?
+{
+   var hashed = crypto.pbkdf2Sync(input, salt, 10000, 512, 'Sha12');
+   return hashed.toString('hex');
+}
+app.get('/hash/:input', function(req, res)
+  {
+      var hashedString = hash(req.params.input, 'this-is-some-random-string');
+      res.send(hashedString); 	
+  }
+);
 
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
