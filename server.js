@@ -5,6 +5,8 @@ var path = require('path');
 var app = express();
 app.use(morgan('combined'));
 
+var crypto = require('crypto');
+
 var articles = {
     'article-one': {
         title: 'Article One | Revathi',
